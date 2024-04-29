@@ -1,42 +1,39 @@
 # ansible-easy-vpn
 ![CI](https://github.com/notthebee/ansible-easy-vpn/actions/workflows/ci.yml/badge.svg)
 
-A simple interactive script that sets up a Wireguard VPN server with Adguard, Unbound and DNSCrypt-Proxy on your VPS of choice, and lets you manage the config files using a simple WebUI protected by two-factor-authentication.
+Um script interativo simples que configura um servidor VPN Wireguard com Adguard, Unbound e DNSCrypt-Proxy em seu VPS de escolha, e permite que você gerencie os arquivos de configuração usando uma WebUI simples protegida por autenticação de dois fatores.
 
-**Have a question or an issue? Read the [FAQ](FAQ.md) first!**
+**Tem uma pergunta ou um problema? Leia primeiro o [FAQ](FAQ.md) primeiro!**
 
 ## Usage
-
 ```
 wget https://notthebe.ee/vpn -O bootstrap.sh && bash bootstrap.sh
 ```
 
-## Features
+## Recursos
 * Wireguard WebUI (via wg-easy)
-* Two-factor authentication for the WebUI (Authelia)
-* Hardened web server (Bunkerweb)
-* Encrypted DNS resolution with optional ad-blocking functionality (Adguard Home, DNSCrypt and Unbound)
-* IPTables firewall with sane defaults and Fail2Ban
-* Automated and unattended upgrades
-* SSH hardening and public key pair generation (optional, you can also use your own keys)
-* E-mail notifications (using an external SMTP server, e.g. GMail)
+* Autenticação de dois fatores para o WebUI (Authelia)
+* Servidor web reforçado (Bunkerweb)
+* Resolução DNS criptografada com funcionalidade opcional de bloqueio de anúncios (Adguard Home, DNSCrypt e Unbound)
+* Firewall IPTables com padrões sensatos e Fail2Ban
+* Atualizações automatizadas e desassistidas
+* Reforço de SSH e geração de par de chaves públicas (opcional, você também pode usar suas próprias chaves)
+* Notificações por e-mail (usando um servidor SMTP externo, por exemplo, GMail)
 
-## Requirements
-* A KVM-based VPS (or an AWS EC2 instance) with a dedicated IPv4 address
-* One of the supported Linux distros:
-  * Ubuntu Server 22.04
-  * Ubuntu Server 20.04
-  * Debian 11
-  * Debian 12
-  * ~~Rocky Linux 8~~ – not supported anymore
-  * ~~Rocky Linux 9~~ - not supported anymore
+## Requisitos
+* Um VPS baseado em KVM (ou uma instância AWS EC2) com um endereço IPv4 dedicado
+* Uma das distribuições Linux suportadas:
+* Ubuntu Server 22.04
+* Ubuntu Server 20.04
+* Debian 11
+* Debian 12
 
-## Known issues with VPS providers
-Normally, the script should work on any KVM-based VPS.
+## Problemas conhecidos com provedores de VPS
+Normalmente, o script deve funcionar em qualquer VPS baseado em KVM.
 
-However, some VPS providers use non-standard versions of Ubuntu/Debian OS images, which might lead to issues with the script.
+No entanto, alguns provedores de VPS usam versões não padrão das imagens do sistema operacional Ubuntu/Debian, o que pode levar a problemas com o script.
 
-Additionally, some providers require additional firewall configuration in the server control panel to unblock the Wireguard port.
+Além disso, alguns provedores exigem configuração adicional de firewall no painel de controle do servidor para desbloquear a porta do Wireguard.
 
-* **AlexHost** – runs `apt-get dist-upgrade` after the VPS is provisioned, which results in a dpkg lock
-* **IONOS** – includes a firewall with default rules, which blocks Wireguard traffic. User needs to open the Wireguard port (51820/udp) in the control panel to make the VPN work.
+AlexHost – executa apt-get dist-upgrade após a provisão do VPS, o que resulta em um bloqueio dpkg
+IONOS – inclui um firewall com regras padrão, que bloqueia o tráfego do Wireguard. O usuário precisa abrir a porta do Wireguard (51820/udp) no painel de controle para que a VPN funcione.
